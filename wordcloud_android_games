@@ -1,0 +1,16 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud
+
+df = pd.read_csv("C:\\Users\\antho\\Documents\\Kaggle Datasets\\Video games\\android-games.csv")
+games = df.sort_values(by ="total ratings", ascending=False)
+games1 = games.head(100)
+text = " "
+for x in games1.title:
+    for y in x:
+        text += y
+print(games1)
+word_cloud = WordCloud(collocations = False, background_color = 'white').generate(text)
+plt.imshow(word_cloud, interpolation='bilinear')
+plt.axis("off")
+plt.show()
