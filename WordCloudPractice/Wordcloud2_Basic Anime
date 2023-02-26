@@ -1,0 +1,22 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from wordcloud import WordCloud
+
+df = pd.read_csv("C:\\Users\\antho\\Documents\\Kaggle Datasets\\Anime\\MALratings.csv")
+
+df2 = df[df.Rank != "/A"]
+df2['Rank'] = df2['Rank'].astype(int)
+anime = df2.sort_values(by ="Rank", ascending=True)
+anime = anime.head(100)
+print(anime)
+
+
+del df
+del df2
+
+text = " ".join(title for title in anime.Title)
+word_cloud = WordCloud(collocations = False, background_color = 'white').generate(text)
+
+plt.imshow(word_cloud, interpolation='bilinear')
+plt.axis("off")
+plt.show()
